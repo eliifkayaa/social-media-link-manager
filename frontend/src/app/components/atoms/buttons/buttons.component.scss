@@ -1,0 +1,24 @@
+button {
+    border: none;
+    border-radius: 39px;
+    font-size: 14px;
+    width: 82.76;
+    height: 42px;
+    padding: 10px 20px;
+
+    &.cancel-button {
+        
+        background-color: #F5F7FF;
+        color: #744BFC;
+    }
+
+    &.save-button, &.add-button { 
+        background-color: #744BFC;
+        color: #FFF;
+        gap: 10px;
+    }
+
+    &:hover {
+        border: 2px solid #000;
+    }
+}
