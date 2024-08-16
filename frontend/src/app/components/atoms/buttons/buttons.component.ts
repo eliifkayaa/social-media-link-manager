@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SharedModule } from '../../../commons/modules/shared/shared.module';
 
 @Component({
   selector: 'app-buttons',
   standalone: true,
-  imports: [CommonModule],
+  imports: [SharedModule],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss'
 })

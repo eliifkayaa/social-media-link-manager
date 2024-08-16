@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonsComponent } from './components/atoms/buttons/buttons.component';
+import { InputFieldComponent } from './components/atoms/input-field/input-field.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonsComponent],
+  imports: [RouterOutlet, ButtonsComponent, InputFieldComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
