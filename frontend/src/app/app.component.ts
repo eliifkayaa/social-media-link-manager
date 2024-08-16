@@ -5,11 +5,13 @@ import { InputFieldComponent } from './components/atoms/input-field/input-field.
 import { IconComponent } from './components/atoms/icon/icon.component';
 import { TextComponent } from './components/atoms/text/text.component';
 import { HeadingComponent } from './components/atoms/heading/heading.component';
+import { SearchComponent } from './components/atoms/search/search.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonsComponent, InputFieldComponent, IconComponent, TextComponent, HeadingComponent],
+  imports: [RouterOutlet, ButtonsComponent, InputFieldComponent, IconComponent, TextComponent, HeadingComponent, SearchComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

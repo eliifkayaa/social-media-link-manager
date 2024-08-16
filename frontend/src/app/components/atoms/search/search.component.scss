@@ -1,0 +1,21 @@
+.input-group {
+    width: 380px;
+    height: 42px;
+
+    .form-control {
+        border-radius: 39px;
+        font-size: 12px;
+         color: #8C8C8C;
+         font-weight: 300;
+         background-color: #fff;
+        ;
+    }
+
+    .input-group-text {
+        width: 45px;
+        border-radius: 39px;
+        background: #744BFC;
+        color: #fff;
+        padding-top: 12px;
+    }
+}
