@@ -1,0 +1,15 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .buttons {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    margin: 20px 150px 0px 0px;
+    gap: 20px;
+    }
+  }

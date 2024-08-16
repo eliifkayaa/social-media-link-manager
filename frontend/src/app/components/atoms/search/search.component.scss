@@ -1,6 +1,7 @@
 .input-group {
     width: 380px;
     height: 42px;
+    cursor: pointer;
 
     .form-control {
         border-radius: 39px;
@@ -8,7 +9,7 @@
          color: #8C8C8C;
          font-weight: 300;
          background-color: #fff;
-        ;
+         padding-left: 30px;
     }
 
     .input-group-text {

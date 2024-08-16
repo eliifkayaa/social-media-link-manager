@@ -10,6 +10,6 @@ import { SharedModule } from '../../../commons/modules/shared/shared.module';
 })
 export class IconComponent {
 
-  @Input() iconClass: string = ''
+  @Input() iconClass: string[]= [];
 
 }

@@ -1,1 +1,11 @@
-<p>form-group works!</p>
+<form>
+    <app-input-field label="Sosyal Medya Linki"  type="url"></app-input-field>
+<app-input-field label="Sosyal Medya Adı" type="text"></app-input-field>
+<app-input-field label="Açıklama" type="text"></app-input-field>
+
+<div class="buttons">
+    <app-buttons buttonType="cancel" label="Vazgeç" class="cancel-button"
+(buttonClick)="onCancelClick()"></app-buttons>
+<app-buttons buttonType="save" label="Kaydet" class="save-button" (buttonClick)="onSaveClick()"></app-buttons>
+</div>
+</form>

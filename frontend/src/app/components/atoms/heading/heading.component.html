@@ -1,1 +1,3 @@
-<h6 [ngClass]="class">{{text}}</h6>
+<ng-container *ngFor="let item of texts">
+  <h6 [ngClass]="class">{{ item }}</h6>
+</ng-container>

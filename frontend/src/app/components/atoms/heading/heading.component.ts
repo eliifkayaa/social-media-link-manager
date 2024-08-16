@@ -11,6 +11,6 @@ import { SharedModule } from '../../../commons/modules/shared/shared.module';
 export class HeadingComponent {
 
   @Input() class: string = '';
-  @Input() text: string = '';
+  @Input() texts:  string[] = [];
 
 }

@@ -1,0 +1,23 @@
+<div class="search-button-group">
+  <div class="search">
+    <app-search
+      type="search"
+      placeholder="Search objects..."
+      iconClass="fa-solid fa-magnifying-glass"
+    ></app-search>
+
+  <div class="icon-container">
+    <app-icon class="icon" [iconClass]="['fa-solid fa-filter']"></app-icon>
+</div>
+  </div>
+
+  <div class="button">
+    <app-buttons
+      buttonType="add"
+      label="Yeni Hesap Ekle"
+      class="add-button"
+      icon="fa fa-plus"
+      (buttonClick)="onAddClick()"
+    ></app-buttons>
+  </div>
+</div>

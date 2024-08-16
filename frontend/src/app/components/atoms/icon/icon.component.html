@@ -1,1 +1,3 @@
-<i [ngClass]="iconClass"></i>
+<ng-container *ngFor="let icon of iconClass">
+    <i [ngClass]="icon"></i>
+  </ng-container>
