@@ -1,0 +1,49 @@
+.container {
+    text-align: left;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    display: table;
+    border-radius: 8px;
+    border: 1px solid #C4CEE5;
+
+    thead,
+    tbody tr,
+    th,
+    td {
+        border: 1px solid #C4CEE5;
+        align-items: center;
+
+    }
+
+    tr {
+        &:nth-child(odd) {
+            background: #fff;
+        }
+
+        &:nth-child(even) {
+            background: linear-gradient(180deg, #EFF2FF -30.56%, rgba(232, 236, 255, 0) 135.85%);
+        }
+    }
+}
+
+.container td,
+.container th {
+    padding-bottom: 1%;
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+// @media {
+//     (max-width {
+//         &: {
+//                 800px) {
+
+//                 .container td: nth-child(4),
+//                 .container th:nth-child(4) {
+//                     display: none;
+//                 }
+//             }
+//         }
+//     }
+// }

@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const socialSchema = new mongoose.Schema({
-    __id: String,
+    _id: {
+        type: String
+    },
     name: {
         type: String,
         required: true

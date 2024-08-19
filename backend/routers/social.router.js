@@ -16,7 +16,7 @@ router.get("/getAll", async (req, res) => {
 router.post("/add", async (req, res)=> {
     const {name, link, description} = req.body;
     let socialMedia = new Social({
-        __id: uuidv4(),
+        _id: uuidv4(),
         name: name.toUpperCase(),
         link: link,
         description: description
@@ -28,22 +28,21 @@ router.post("/add", async (req, res)=> {
 //SocialMedia Güncelleme
 router.post("/update", async (req, res)=> {
 response(res, async()=> {
-    const {id, name, link, description} = req.body;
-    const socialMedia = await Social.findByIdAndUpdate(_id);
-    socialMedia.name = name.toUpperCase();
-    await Social.findByIdAndUpdate(_id, socialMedia);
-    res.json({message: "Sosyal Medya hesabı başarıyla güncellendi"})
+    const {_id, name, link, description} = req.body;
+    await Social.findByIdAndUpdate(_id, {
+        name: name.toUpperCase(),
+        link: link,
+        description: description
+    });
+    res.json({message: "Sosyal Medya hesabı başarıyla güncellendi"});
 })
 });
 
 //SocialMedia Silme
 router.post("/removeById", async (req,res) => {
-    response(res, async ()=> {
-        const {_id} = req.body;
-        const result = await Social.find({socialMedia: _id});
-        await Social.findByIdAndRemove(_id);
-        res.json({message: "Sosyal Medya hesabı başarıyla silindi!"});  
-    })
+    const {_id} = req.body;
+    await Social.findByIdAndDelete(_id);
+    res.json({message: "Sosyal Medya hesabı başarıyla silindi!"}); 
 })
 
 module.exports = router;
