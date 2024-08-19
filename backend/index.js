@@ -2,6 +2,9 @@ const connection = require('./database/db');
 const express = require('express');
 const cors = require('cors');
 
+//Routes
+const socialMediaRouter = require("./routers/social.router")
+
 //Api istekleri için:
 const app = express();
 
@@ -13,6 +16,9 @@ app.use(cors());
 
 //DB Connection
 connection();
+
+//Social Media Routes
+app.use("/api/socialmedia/", socialMediaRouter)
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log("Server is running"))
