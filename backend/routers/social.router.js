@@ -8,7 +8,7 @@ const response = require("../services/response.service");
 router.get("/getAll", async (req, res) => {
     response (res, async()=> {
         const socialMedia = await Social.find({}).sort({name:1});
-        response.json(socialMedia)
+        res.json(socialMedia)
     })
 });
 

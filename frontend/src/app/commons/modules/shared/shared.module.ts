@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ValidDirective } from '../../directives/valid.directive';
-import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [],
@@ -12,15 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     FormsModule,
     ValidDirective,
-    HttpClientModule,
-    
+    NgbModule
   ],
   exports: [
     CommonModule,
     RouterModule,
     FormsModule,
     ValidDirective,
-    HttpClientModule
+    NgbModule
   ]
 })
 export class SharedModule { }

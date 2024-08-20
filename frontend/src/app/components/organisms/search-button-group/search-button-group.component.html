@@ -17,7 +17,9 @@
       label="Yeni Hesap Ekle"
       class="add-button"
       icon="fa fa-plus"
-      (buttonClick)="onAddClick()"
+      (buttonClick)="openModal()"
     ></app-buttons>
   </div>
 </div>
+
+<app-modal [isVisible]="isModalVisible" (modalClose)="closeModal()"></app-modal>

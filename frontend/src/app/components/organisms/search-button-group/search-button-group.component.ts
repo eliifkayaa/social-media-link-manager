@@ -2,17 +2,30 @@ import { Component } from '@angular/core';
 import { SearchComponent } from '../../atoms/search/search.component';
 import { IconComponent } from '../../atoms/icon/icon.component';
 import { ButtonsComponent } from '../../atoms/buttons/buttons.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../../../commons/modules/shared/shared.module';
+import { FormGroupComponent } from '../../molecules/form-group/form-group.component';
+import { ModalComponent } from '../../molecules/modal/modal.component';
 
 @Component({
   selector: 'app-search-button-group',
   standalone: true,
-  imports: [SearchComponent, IconComponent, ButtonsComponent],
+  imports: [SharedModule,SearchComponent, IconComponent, ButtonsComponent, FormGroupComponent, ModalComponent],
   templateUrl: './search-button-group.component.html',
   styleUrl: './search-button-group.component.scss'
 })
 export class SearchButtonGroupComponent {
+  constructor(private modalService: NgbModal) {}
+  isModalVisible: boolean = false;
 
-  onAddClick() {
-    console.log('onAddClick');
+  openModal() {
+    this.isModalVisible = true;
+    console.log('Modal açıldı:', this.isModalVisible);
+  }
+
+  closeModal() {
+    this.isModalVisible = false;
+    console.log('Modal kapatıldı:', this.isModalVisible);
   }
 }
+
