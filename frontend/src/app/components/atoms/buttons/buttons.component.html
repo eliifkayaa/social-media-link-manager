@@ -1,7 +1,8 @@
 <button [ngClass]="{
     'cancel-button': buttonType === 'cancel',
     'save-button': buttonType === 'save',
-    'add-button': buttonType === 'add'
+    'add-button': buttonType === 'add',
+    'update-button': buttonType === 'update',
 }"
 (click)="handleClick()"
 type="button"

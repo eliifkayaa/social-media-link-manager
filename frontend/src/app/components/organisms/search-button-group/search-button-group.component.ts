@@ -13,6 +13,9 @@ import { ModalComponent } from '../../molecules/modal/modal.component';
   styleUrl: './search-button-group.component.scss'
 })
 export class SearchButtonGroupComponent {
+
+  search: string = "";
+
   constructor() {}
   isModalVisible: boolean = false;
 

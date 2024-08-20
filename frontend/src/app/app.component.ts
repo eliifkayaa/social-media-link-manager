@@ -9,13 +9,13 @@ import { SearchComponent } from './components/atoms/search/search.component';
 import { FormGroupComponent } from './components/molecules/form-group/form-group.component';
 import { NavbarLinkComponent } from './components/molecules/navbar-link/navbar-link.component';
 import { OrganismsNavbarComponent } from './components/organisms/organisms-navbar/organisms-navbar.navbar.component';
-import { PageComponent } from './components/organisms/page/page.component';
+import { PageComponent } from './components/page/page.component';
+import { SharedModule } from './commons/modules/shared/shared.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonsComponent, InputFieldComponent, IconComponent, TextComponent, HeadingComponent, SearchComponent,
-    FormGroupComponent, NavbarLinkComponent, OrganismsNavbarComponent, PageComponent],
+  imports: [RouterOutlet, PageComponent, SharedModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

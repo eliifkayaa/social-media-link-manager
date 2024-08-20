@@ -3,20 +3,51 @@ import { SharedModule } from '../../../commons/modules/shared/shared.module';
 import { FilterPipe } from '../../../commons/pipes/filter.pipe';
 import { TextComponent } from '../../atoms/text/text.component';
 import { PaginationComponent } from '../pagination/pagination.component';
-declare const $: any;
+import { SocialMediaService } from '../../../commons/services/social-media.service';
+import { SearchButtonGroupComponent } from '../search-button-group/search-button-group.component';
+import { IconComponent } from '../../atoms/icon/icon.component';
+import { SearchComponent } from '../../atoms/search/search.component';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [SharedModule, TextComponent, PaginationComponent, FilterPipe],
+  imports: [SharedModule, TextComponent, PaginationComponent, FilterPipe, SearchButtonGroupComponent, IconComponent, SearchComponent],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+  styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit{
+export class TableComponent implements OnInit {
+  socials: any[] = [];
+  search: string = '';
+
+  constructor(private socialMediaService: SocialMediaService) {}
+
   ngOnInit(): void {
-   
+    this.loadSocials();
   }
 
+  loadSocials(): void {
+    this.socialMediaService.getAllSocialMedia().subscribe(
+      (data: any[]) => {
+        this.socials = data;
+      },
+      (error) => {
+        console.error('Error fetching social media data', error);
+      }
+    );
+  }
 
+  get(social: any): void {
+    // Güncelleme işlemleri için gerekli işlev
+  }
 
+  removeById(social: any): void {
+    this.socialMediaService.removeSocialMedia(social._id).subscribe(
+      () => {
+        this.loadSocials(); // Veriyi güncelledikten sonra yeniden yükle
+      },
+      (error) => {
+        console.error('Error removing social media', error);
+      }
+    );
+  }
 }

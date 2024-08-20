@@ -1,9 +1,13 @@
-
 <div class="input-group mb-3">
-    <input [type]="type" class="form-control" [placeholder]="placeholder">
-    <i (click)="handleClick()" [ngClass]="iconClass" class="input-group-text "></i>  
-  </div>
+  <input
+    [type]="type"
+    class="form-control"
+    [placeholder]="placeholder"
+    (input)="onSearchChange($event)"
+  />
+  <i [ngClass]="iconClass" class="input-group-text"></i>
+</div>
 
-  <div class="icon">
-    <i class=""></i>
-  </div>
+<div class="icon">
+  <i class=""></i>
+</div>

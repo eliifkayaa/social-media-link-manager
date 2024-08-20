@@ -9,11 +9,11 @@ import { SharedModule } from '../../../commons/modules/shared/shared.module';
   styleUrl: './buttons.component.scss'
 })
 export class ButtonsComponent {
-  @Input() buttonType: 'cancel' | 'save' | 'add' = 'save';
+  @Input() buttonType: 'cancel' | 'save' | 'add' | 'update' = 'save';
   @Input() label: string ='';
   @Input () icon?: string;
 
-  // Click eventini parent component'e iletmek için EventEmitter kullanılır
+  // Click eventini parent component'e iletmek için EventEmitter kullanılır.
   @Output() buttonClick = new EventEmitter<void>();
 
   handleClick() {

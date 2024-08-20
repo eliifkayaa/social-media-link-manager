@@ -1,3 +1,48 @@
+.search {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      float: left;
+      gap: 10px;
+      margin-top: 40px;
+  
+      .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 49px;
+        height: 42px;
+        border-radius: 50%;
+        background-color: #fff; 
+        margin-bottom: 12px;
+      }
+    }
+  
+  
+  @media (max-width: 768px) {
+    .search-button-group {
+      flex-direction: column; 
+      align-items: stretch; 
+      margin-top: 10px; 
+    }
+  
+    .search, .button {
+      width: 100%;
+      margin-bottom: 10px; 
+    }
+  
+    .button {
+      margin-bottom: 0;
+    }
+
+    .icon-container {
+        width: 30px;
+        height: 30px;
+      }
+}
+
+
+
 .container {
     text-align: left;
     overflow: hidden;
@@ -34,16 +79,3 @@
     padding-left: 1%;
 }
 
-// @media {
-//     (max-width {
-//         &: {
-//                 800px) {
-
-//                 .container td: nth-child(4),
-//                 .container th:nth-child(4) {
-//                     display: none;
-//                 }
-//             }
-//         }
-//     }
-// }

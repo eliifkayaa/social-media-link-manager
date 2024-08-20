@@ -1,3 +1,18 @@
+<div class="search-button-group">
+  <div class="search">
+    <app-search
+      type="search"
+      placeholder="Search objects..."
+      iconClass="fa-solid fa-magnifying-glass"
+      [(ngModel)]="search"
+    ></app-search>
+  
+  <div class="icon-container">
+    <app-icon class="icon" [iconClass]="['fa-solid fa-filter']"></app-icon>
+  </div>
+  </div>
+</div>
+
 <table class="container">
   <thead>
     <tr>
@@ -16,19 +31,19 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <tr *ngFor="let social of socials | filterPipe: search">
-      <td>{{social.link}}</td>
-      <td>{{social.name}}</td>
-      <td>{{social.description}}</td> -->
-      <!-- <td>
-        <button (click)="get(social)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-outline-warning btn-sm mx-1">
+    <tr *ngFor="let social of socials | filterPipe: search">
+      <td>{{ social.link }}</td>
+      <td>{{ social.name }}</td>
+      <td>{{ social.description }}</td> 
+      <td>
+        <button (click)="get(social)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-outline-warning btn-sm ">
           <i class="fa fa-edit"></i>
         </button>
         <button (click)="removeById(social)" class="btn btn-outline-danger btn-sm">
           <i class="fa fa-trash"></i>
         </button>
-      </td> -->
-    <!-- </tr> -->
+      </td>
+    </tr>
   </tbody>
 </table>
 <app-pagination></app-pagination>
