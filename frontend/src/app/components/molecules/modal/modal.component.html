@@ -4,7 +4,11 @@
         <div class="modal-header">
           <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
         </div>
-        <app-form-group></app-form-group>
+        <app-form-group
+          [socialMedia]="socialMedia"
+          (formSaved)="onFormSaved()"
+          (formCancelled)="onFormCancelled()">
+        </app-form-group>
       </div>
     </div>
   </div>

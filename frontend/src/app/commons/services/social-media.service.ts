@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SocialMediaService {
-  private apiUrl = 'http://localhost:3000'; 
+  private apiUrl = 'http://localhost:3000/api/socialmedia'; 
 
     constructor(private http: HttpClient) { }
 

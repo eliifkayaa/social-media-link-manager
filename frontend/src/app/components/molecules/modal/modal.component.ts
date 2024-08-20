@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroupComponent } from '../form-group/form-group.component';
 import { SocialMediaService } from '../../../commons/services/social-media.service';
 import { SharedModule } from '../../../commons/modules/shared/shared.module';
+import { SocialMediaModel } from '../../../commons/model/socialMedia.model';
 
 @Component({
   selector: 'app-modal',
@@ -12,32 +13,25 @@ import { SharedModule } from '../../../commons/modules/shared/shared.module';
 })
 export class ModalComponent implements OnInit {
 
-  ngOnInit(): void {
-   
-  }
+  constructor(private socialMediaService: SocialMediaService) {}
+
+
   @Input() isVisible: boolean = false;
   @Output() modalClose = new EventEmitter<void>();
 
-  socialMedia: any = {
-    link: '',
-    name: '',
-    description: ''
-  };
+  socialMedia: SocialMediaModel = new SocialMediaModel();
 
-  constructor(private socialMediaService: SocialMediaService) {}
-
- 
+  ngOnInit(): void { }
 
   closeModal() {
     this.isVisible = false;
-    this.modalClose.emit();
   }
-  saveSocialMedia() {
-    this.socialMediaService.addSocialMedia(this.socialMedia).subscribe(response => {
-      console.log('Sosyal medya hesabı kaydedildi:', response);
-      this.closeModal();
-    }, error => {
-      console.error('Hata:', error);
-    });
+
+  onFormSaved() {
+    this.closeModal();
+  }
+
+  onFormCancelled() {
+    this.closeModal();
   }
 }

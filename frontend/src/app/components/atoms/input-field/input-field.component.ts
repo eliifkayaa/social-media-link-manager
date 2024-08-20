@@ -14,4 +14,14 @@ export class InputFieldComponent {
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
 
+  private _value: string = '';
+
+  @Input()
+  get value(): string {
+    return this._value;
+  }
+
+  set value(val: string) {
+    this._value = val;
+  }
 }

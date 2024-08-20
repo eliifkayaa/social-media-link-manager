@@ -1,4 +1,9 @@
 <div class="input-field">
   <label class="form-label">{{ label }}</label>
-  <input [type]="type" [placeholder]="placeholder" class="form-control" />
+  <input
+    [type]="type"
+    [(ngModel)]="value"
+    [placeholder]="placeholder"
+    class="form-control"
+  />
 </div>
