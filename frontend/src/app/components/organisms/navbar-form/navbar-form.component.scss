@@ -2,11 +2,13 @@
     display: flex;
     justify-content: center;
 
+
     .container-fluid {
         display: flex;
         justify-content: center; 
         align-items: center;
         gap: 50px;
+        margin-top: 20px;
     }
   
 }

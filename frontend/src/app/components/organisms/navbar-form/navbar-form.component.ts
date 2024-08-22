@@ -5,12 +5,12 @@ import { SocialIconGroupComponent } from '../../molecules/social-icon-group/soci
 import { LogoComponent } from '../../molecules/logo/logo.component';
 
 @Component({
-  selector: 'app-organisms-navbar',
+  selector: 'app-navbar-form',
   standalone: true,
   imports: [NavbarLinkComponent, SocialIconGroupComponent, LogoComponent],
-  templateUrl: './organisms-navbar.component.html',
-  styleUrl: './organisms-navbar.component.scss'
+  templateUrl: './navbar-form.component.html',
+  styleUrl: './navbar-form.component.scss'
 })
-export class OrganismsNavbarComponent {
+export class NavbarFormComponent {
 
 }

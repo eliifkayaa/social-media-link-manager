@@ -5,5 +5,8 @@
     [(ngModel)]="value"
     [placeholder]="placeholder"
     class="form-control"
+    [appValid]="validType"
+    [appValidMessage]="appValidMessage"
   />
+  <div class="invalid-feedback"></div>
 </div>

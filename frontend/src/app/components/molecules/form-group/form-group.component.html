@@ -1,11 +1,38 @@
 <form>
-    <app-input-field #linkField label="Sosyal Medya Linki" type="url"></app-input-field>
-    <app-input-field #nameField label="Sosyal Medya Adı" type="text"></app-input-field>
-    <app-input-field #descriptionField label="Açıklama" type="text"></app-input-field>
+  <app-input-field
+    label="Sosyal Medya Linki"
+    type="url"
+    appValidMessage="Geçerli bir URL girin"
+    validType="url"
+  ></app-input-field>
 
-<div class="buttons">
-    <app-buttons buttonType="cancel" label="Vazgeç" class="cancel-button"
-(buttonClick)="onCancelClick()"></app-buttons>
-<app-buttons buttonType="save" label="Kaydet" class="save-button" (buttonClick)="onSaveClick()"></app-buttons>
-</div>
+  <app-input-field
+    label="Sosyal Medya Adı"
+    type="text"
+    appValidMessage="Sosyal Medya adı boş olamaz"
+    validType="required"
+  ></app-input-field>
+
+  <app-input-field
+    label="Açıklama"
+    type="text"
+    appValidMessage="Açıklama boş olamaz"
+    validType="required"
+  ></app-input-field>
+
+  <div class="buttons">
+    <app-buttons
+      buttonType="cancel"
+      label="Vazgeç"
+      class="cancel-button"
+      (buttonClick)="onCancelClick()"
+    ></app-buttons>
+
+    <app-buttons
+      buttonType="save"
+      label="Kaydet"
+      class="save-button"
+      (buttonClick)="onSaveClick()"
+    ></app-buttons>
+  </div>
 </form>

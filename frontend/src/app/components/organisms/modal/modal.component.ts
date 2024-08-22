@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroupComponent } from '../form-group/form-group.component';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SocialMediaService } from '../../../commons/services/social-media.service';
 import { SharedModule } from '../../../commons/modules/shared/shared.module';
 import { SocialMediaModel } from '../../../commons/model/socialMedia.model';
+import { ButtonsComponent } from '../../atoms/buttons/buttons.component';
+import { FormGroupComponent } from '../../molecules/form-group/form-group.component';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [FormGroupComponent, SharedModule],
+  imports: [FormGroupComponent, SharedModule, ButtonsComponent],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss'
+  styleUrl: './modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalComponent implements OnInit {
 
@@ -25,13 +27,15 @@ export class ModalComponent implements OnInit {
 
   closeModal() {
     this.isVisible = false;
+    this.modalClose.emit();// Modal'in kapandığını parent bileşene bildirir.
   }
 
   onFormSaved() {
-    this.closeModal();
+  this.socialMediaService.addSocialMedia(this.socialMedia).subscribe(
+    () => {
+      console.log("Kaydedildi");
+      this.closeModal();
+    })
   }
 
-  onFormCancelled() {
-    this.closeModal();
-  }
 }
