@@ -41,8 +41,12 @@ export class SearchComponent implements ControlValueAccessor{
 
   onSearchChange(event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.search = target.value;
-    this.onChange(this.search);
-    this.onTouched();
+    if (target) {
+      this.search = target.value;
+      this.onChange(this.search);
+      this.onTouched();
+    } else {
+      console.error('Event target is undefined');
+    }
   }
 }

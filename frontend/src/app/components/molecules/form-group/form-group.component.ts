@@ -60,7 +60,7 @@ export class FormGroupComponent implements OnInit{
         this.socialMediaService.update({ ...this.socialMedia, ...socialMediaData }).subscribe(
           response => {
             console.log('Başarıyla güncellendi', response);
-            this.formSaved.emit(); // Form kaydedildiğinde modal kapatır
+            this.formSaved.emit(); // Form güncellendiğinde modal kapatır
           },
           error => {
             console.error('Güncelleme hatası:', error);
