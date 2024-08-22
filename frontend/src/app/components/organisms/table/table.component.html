@@ -33,22 +33,26 @@
   ></app-modal>
 
   <table class="container">
+  
     <thead>
-      <tr>
-        <th scope="col">
-          <app-text class="text" text="Sosyal Medya Link"></app-text>
-        </th>
-        <th scope="col">
-          <app-text text="Sosyal Medya Adı"></app-text>
-        </th>
-        <th scope="col">
-          <app-text text="Açıklama"></app-text>
-        </th>
-        <th scope="col">
-          <app-text text="İşlemler"></app-text>
-        </th>
-      </tr>
+ 
+    <tr>
+      <th scope="col" class="col-4">
+        <app-text class="text" text="Sosyal Medya Link"></app-text>
+      </th>
+      <th scope="col" class="col-2">
+        <app-text text="Sosyal Medya Adı"></app-text>
+      </th>
+      <th scope="col" class="col-4">
+        <app-text text="Açıklama"></app-text>
+      </th>
+      <th scope="col" class="col-2">
+        <app-text text="İşlemler"></app-text>
+      </th>
+    </tr>
+ 
     </thead>
+
     <tbody>
       <tr *ngFor="let social of socials | filterPipe : search">
         <td><app-text text="{{ social.link }}"></app-text></td>

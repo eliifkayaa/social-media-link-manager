@@ -6,15 +6,15 @@
     justify-content: space-between;
     align-items: center;
     // margin: 20px 40px 0px 20px; 
-  
+
     .search {
       display: flex;
       align-items: center;
-        justify-content: flex-start;
+      justify-content: flex-start;
       float: left;
       gap: 10px;
       margin-top: 40px;
-  
+
       .icon-container {
         display: flex;
         align-items: center;
@@ -22,84 +22,81 @@
         width: 49px;
         height: 42px;
         border-radius: 50%;
-        background-color: #fff; 
+        background-color: #fff;
         margin-bottom: 12px;
       }
     }
-  
+
     .button {
       display: flex;
       align-items: center;
       margin-top: 30px;
     }
   }
-  
+
   @media (max-width: 768px) {
     .search-button-group {
-      flex-direction: column; 
-      align-items: stretch; 
-      margin-top: 10px; 
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 10px;
     }
-  
-    .search, .button {
+
+    .search,
+    .button {
       width: 100%;
-      margin-bottom: 10px; 
+      margin-bottom: 10px;
     }
-  
+
     .button {
       margin-bottom: 0;
     }
-  
+
     .icon-container {
-        width: 30px;
-        height: 30px;
-      }
+      width: 30px;
+      height: 30px;
+    }
   }
-  
+
   .container {
-      text-align: left;
-      overflow: hidden;
+    text-align: left;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    display: table;
+    border-radius: 8px;
+    border: 1px solid #C4CEE5;
+
+    .icon {
       width: 100%;
-      margin: 0 auto;
-      display: table;
-      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+    }
+
+    thead,
+    tbody tr,
+    th,
+    td {
       border: 1px solid #C4CEE5;
+    }
 
-      .icon {
-        width: 50px;
-       display: flex;
-       align-items: center;
-       gap: 5px;
+    tr {
+      &:nth-child(odd) {
+        background: #fff;
       }
-  
-      thead,
-      tbody tr,
-      th,
-      td {
-          border: 1px solid #C4CEE5;
-          text-align:left;
+
+      &:nth-child(even) {
+        background: linear-gradient(180deg, #EFF2FF -30.56%, rgba(232, 236, 255, 0) 135.85%);
       }
-  
-      tr {
-          &:nth-child(odd) {
-              background: #fff;
-          }
-  
-          &:nth-child(even) {
-              background: linear-gradient(180deg, #EFF2FF -30.56%, rgba(232, 236, 255, 0) 135.85%);
-          }
-      }
-      }
+    }
   }
-  
-  .container td,
-  .container th {
-      padding-bottom: 1%;
-      padding-top: 1%;
-      padding-left: 1%;
-  }
-  
+}
 
-
-
-
+.container td,
+.container th {
+  padding-bottom: 1%;
+  padding-top: 1%;
+  padding-left: 1%;
+}
