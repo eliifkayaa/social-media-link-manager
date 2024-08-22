@@ -66,17 +66,10 @@
       border: 1px solid #C4CEE5;
 
       .icon {
+        width: 50px;
        display: flex;
-       justify-content: center;
        align-items: center;
-       gap: 20px;
-       
-       app-buttons {
-        background-color: #744BFC;
-        color: #FFF;
-        gap: 10px;
-        color: #fff;
-       }
+       gap: 5px;
       }
   
       thead,

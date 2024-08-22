@@ -32,9 +32,9 @@
     ></app-buttons>
 
     <app-buttons
-      buttonType="save"
-      label="Kaydet"
-      class="save-button"
+      [buttonType]="action === 'update' ? 'update' : 'save'"
+      [label]="action === 'save' ? 'Kaydet' : 'Güncelle'"
+      [class]="action === 'update' ? 'update-button' : 'save-button'"
       (buttonClick)="onSaveClick()"
     ></app-buttons>
   </div>

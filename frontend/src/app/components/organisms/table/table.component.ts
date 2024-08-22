@@ -29,11 +29,11 @@ import { of } from 'rxjs';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  socials: any[] = [];
+  socials: SocialMediaModel[] = [];
   search: string = '';
   isModalVisible: boolean = false;
-
-  social: SocialMediaModel = new SocialMediaModel();
+  modalAction: 'save' | 'update' = 'save';  
+  selectedSocial: SocialMediaModel = new SocialMediaModel();
 
   constructor(private _socialMedia: SocialMediaService) {}
 
@@ -43,18 +43,15 @@ export class TableComponent implements OnInit {
 
   getAll(): void {
     this._socialMedia.getAll().subscribe(
-      (data: any[]) => {
+      (data: SocialMediaModel[]) => {
         this.socials = data;
       },
       (error) => {
-        console.error('Error fetching social media data', error);
+        console.error('Error', error);
       }
     );
   }
 
-  get(social: any): void {
-    // Güncelleme işlemleri için gerekli işlev
-  }
   remove(social: SocialMediaModel): void {
     if (confirm('Bu kaydı silmek istediğinizden emin misiniz?')) {
       this._socialMedia.remove(social._id).subscribe(
@@ -62,20 +59,30 @@ export class TableComponent implements OnInit {
           this.socials = this.socials.filter(item => item._id !== social._id);
         },
         (error) => {
-          console.error('Error deleting social media item', error);
+          console.error('Error', error);
         }
       );
     }
   }
 
   //Modal dialog
-  openModal() {
+  openModal(action: 'save' | 'update', social?: SocialMediaModel): void {
+    this.modalAction = action;
+    if (action === 'update' && social) {
+      this.selectedSocial = { ...social };  // Güncellenmiş sosyal medya verilerini seç
+    } else {
+      this.selectedSocial = new SocialMediaModel();  // Yeni ekleme için resetle
+    }
     this.isModalVisible = true;
-    console.log('Modal açıldı:', this.isModalVisible);
   }
 
   closeModal() {
     this.isModalVisible = false;
     console.log('Modal kapatıldı:', this.isModalVisible);
+  }
+
+  onFormSaved(): void {
+    this.getAll();  
+    this.closeModal();
   }
 }

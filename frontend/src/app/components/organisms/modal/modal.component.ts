@@ -23,9 +23,12 @@ export class ModalComponent implements OnInit {
   constructor() {}
 
   @Input() isVisible: boolean = false;
+ 
+  @Input() socialMedia: SocialMediaModel = new SocialMediaModel();
   @Output() modalClose = new EventEmitter<void>();
+  @Output() formSaved = new EventEmitter<void>();
 
-  socialMedia: SocialMediaModel = new SocialMediaModel();
+  @Input() action: 'save' | 'update' = 'save';
 
   ngOnInit(): void {}
 
@@ -36,6 +39,7 @@ export class ModalComponent implements OnInit {
 
   onFormSaved() {
     console.log('Form başarıyla kaydedildi');
+    this.formSaved.emit();
     this.closeModal();
   }
 }

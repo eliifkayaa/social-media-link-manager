@@ -16,37 +16,57 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FormGroupComponent implements OnInit{
   @Input() socialMedia: SocialMediaModel = new SocialMediaModel();
-
-  //Componentler arasında olaylarını dinler ve veri iletimi veya olay tetikleme sağlar
+  @Input() action: 'save' | 'update' = 'save'; 
   @Output() formCancelled = new EventEmitter<void>();
   @Output() formSaved = new EventEmitter<void>();
-  @Output() dataUpdated = new EventEmitter<void>();
 
   form: FormGroup;
 
   constructor(private socialMediaService: SocialMediaService, private fb: FormBuilder) {
-    this.form = this.fb.group ({
+    this.form = this.fb.group({
       link: [''],
       name: [''],
       description: [''],
-    })
+    });
   }
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    if (this.action === 'update' && this.socialMedia) {
+      // Formu güncelle
+      this.form.patchValue({
+        link: this.socialMedia.link,
+        name: this.socialMedia.name,
+        description: this.socialMedia.description
+      });
+    }
+  }
 
   onSaveClick() {
     console.log('Kaydet butonuna tıklandı!');
     if (this.form.valid) {
       const socialMediaData = this.form.value;
-
-      this.socialMediaService.add(socialMediaData).subscribe(
-        response => {
-          console.log('Başarıyla kaydedildi', response);
-          this.formSaved.emit(); // Form kaydedildiğinde modal kapatır
-        },
-        error => {
-          console.error('Kaydetme hatası:', error);
-        }
-      );
+      if (this.action === 'save') {
+        this.socialMediaService.add(socialMediaData).subscribe(
+          response => {
+            console.log('Başarıyla kaydedildi', response);
+            this.formSaved.emit(); // Form kaydedildiğinde modal kapatır
+          },
+          error => {
+            console.error('Kaydetme hatası:', error);
+          }
+        );
+      } else if (this.action === 'update') {
+        // Güncellemeyi yap
+        this.socialMediaService.update({ ...this.socialMedia, ...socialMediaData }).subscribe(
+          response => {
+            console.log('Başarıyla güncellendi', response);
+            this.formSaved.emit(); // Form kaydedildiğinde modal kapatır
+          },
+          error => {
+            console.error('Güncelleme hatası:', error);
+          }
+        );
+      }
     } else {
       console.log('Form geçersiz');
     }

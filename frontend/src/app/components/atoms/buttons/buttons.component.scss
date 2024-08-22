@@ -6,13 +6,13 @@ button {
     height: 42px;
     padding: 10px 20px;
 
-    &.cancel-button {
+    &.cancel-button, &.delete-button{
         
         background-color: #F5F7FF;
         color: #744BFC;
     }
 
-    &.save-button, &.add-button { 
+    &.save-button, &.add-button, &.update-button { 
         background-color: #744BFC;
         color: #FFF;
         gap: 10px;

@@ -1,4 +1,3 @@
-
 <div class="container-table">
   <div class="search-button-group">
     <div class="search">
@@ -8,25 +7,31 @@
         iconClass="fa-solid fa-magnifying-glass"
         [(ngModel)]="search"
       ></app-search>
-    
-    <div class="icon-container">
-      <app-icon class="icon" [iconClass]="['fa-solid fa-filter']"></app-icon>
+
+      <div class="icon-container">
+        <app-icon class="icon" [iconClass]="['fa-solid fa-filter']"></app-icon>
+      </div>
     </div>
-    </div>
-  
+
     <div class="button">
       <app-buttons
         buttonType="add"
         label="Yeni Hesap Ekle"
         class="add-button"
         icon="fa fa-plus"
-        (buttonClick)="openModal()"
+        (buttonClick)="openModal('save')"
       ></app-buttons>
     </div>
   </div>
-  
-  <app-modal [isVisible]="isModalVisible" (modalClose)="closeModal()"></app-modal>
-  
+
+  <app-modal
+  [isVisible]="isModalVisible" 
+  [action]="modalAction"
+  [socialMedia]="selectedSocial"
+  (modalClose)="closeModal()"
+  (formSaved)="onFormSaved()">
+  ></app-modal>
+
   <table class="container">
     <thead>
       <tr>
@@ -45,17 +50,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let social of socials | filterPipe: search">
+      <tr *ngFor="let social of socials | filterPipe : search">
         <td><app-text text="{{ social.link }}"></app-text></td>
         <td><app-text text="{{ social.name }}"></app-text></td>
         <td><app-text text="{{ social.description }}"></app-text></td>
         <td>
-         <div class="icon">
-          <app-buttons icon="fa fa-edit" (buttonClick)="openModal()" buttonType="update">
-          </app-buttons>
-          <app-buttons (click)="remove(social)" buttonType="delete"  icon="fa fa-trash">
-          </app-buttons>
-         </div>
+          <div class="icon">
+            <app-buttons
+              icon="fa fa-edit"
+              (buttonClick)="openModal('update', social)"
+              buttonType="update"
+            >
+            </app-buttons>
+            <app-buttons
+              (click)="remove(social)"
+              buttonType="delete"
+              icon="fa fa-trash"
+            >
+            </app-buttons>
+          </div>
         </td>
       </tr>
     </tbody>

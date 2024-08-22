@@ -1,11 +1,12 @@
-<div class="modal" tabindex="-1" role="dialog" *ngIf="isVisible">
-    <div class="modal-dialog" role="document">
+<div class="modal" tabindex="-1" *ngIf="isVisible">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
         </div>
         <app-form-group
           [socialMedia]="socialMedia"
+          [action]="action"
           (formSaved)="onFormSaved()"
           (formCancelled)="closeModal()">
         </app-form-group>

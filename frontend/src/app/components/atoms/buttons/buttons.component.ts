@@ -13,11 +13,26 @@ export class ButtonsComponent {
   @Input() label: string ='';
   @Input () icon?: string;
 
-  // Click eventini parent component'e iletmek için EventEmitter kullanılır.
   @Output() buttonClick = new EventEmitter<void>();
 
-  
   handleClick() {
     this.buttonClick.emit();
+  }
+
+  getDefaultLabel() { 
+    switch (this.buttonType) {
+        case 'add':
+          return 'Yeni Hesap Ekle';
+        case 'update':
+          return 'Güncelle';
+        case 'delete':
+          return 'Sil';
+        case 'cancel':
+          return 'Vazgeç';
+        case 'save':
+          return 'Kaydet';
+        default:
+          return '';
+    }
   }
 }

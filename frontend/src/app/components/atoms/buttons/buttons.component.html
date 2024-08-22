@@ -1,15 +1,15 @@
 <button [ngClass]="{
-    'cancel-button': buttonType === 'cancel',
-    'save-button': buttonType === 'save',
-    'add-button': buttonType === 'add',
-    'update-button': buttonType === 'update',
-    'delete-button': buttonType === 'delete',
+  'cancel-button': buttonType === 'cancel',
+  'save-button': buttonType === 'save',
+  'add-button': buttonType === 'add',
+  'update-button': buttonType === 'update',
+  'delete-button': buttonType === 'delete',
 }"
 (click)="handleClick()"
 type="button"
 >
 <ng-container *ngIf="icon">
-<i class="{{icon}}"></i>
+  <i class="{{icon}}"></i>
 </ng-container>
 {{label}}
 </button>
