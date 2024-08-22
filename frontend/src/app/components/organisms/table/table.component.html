@@ -50,10 +50,12 @@
         <td><app-text text="{{ social.name }}"></app-text></td>
         <td><app-text text="{{ social.description }}"></app-text></td>
         <td>
+         <div class="icon">
           <app-buttons icon="fa fa-edit" (buttonClick)="openModal()" buttonType="update">
           </app-buttons>
           <app-buttons (click)="remove(social)" buttonType="delete"  icon="fa fa-trash">
           </app-buttons>
+         </div>
         </td>
       </tr>
     </tbody>

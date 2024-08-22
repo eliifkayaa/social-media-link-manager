@@ -64,6 +64,20 @@
       display: table;
       border-radius: 8px;
       border: 1px solid #C4CEE5;
+
+      .icon {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       gap: 20px;
+       
+       app-buttons {
+        background-color: #744BFC;
+        color: #FFF;
+        gap: 10px;
+        color: #fff;
+       }
+      }
   
       thead,
       tbody tr,
