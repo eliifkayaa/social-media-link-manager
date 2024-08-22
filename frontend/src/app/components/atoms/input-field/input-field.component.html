@@ -2,9 +2,9 @@
   <label class="form-label">{{ label }}</label>
   <input
     [type]="type"
-    [(ngModel)]="value"
     [placeholder]="placeholder"
     class="form-control"
+    [formControl]="control"
     [appValid]="validType"
     [appValidMessage]="appValidMessage"
   />

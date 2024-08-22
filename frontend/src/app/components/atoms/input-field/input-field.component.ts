@@ -1,13 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { SharedModule } from '../../../commons/modules/shared/shared.module';
 import { ValidDirective } from '../../../commons/directives/valid.directive';
+import { FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input-field',
   standalone: true,
   imports: [SharedModule, ValidDirective],
   templateUrl: './input-field.component.html',
-  styleUrl: './input-field.component.scss'
+  styleUrl: './input-field.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputFieldComponent),
+      multi: true,
+    },
+  ],
 })
 export class InputFieldComponent {
 
@@ -17,14 +25,21 @@ export class InputFieldComponent {
   @Input() appValidMessage: string = ''; // Validasyon mesajı
   @Input() validType: 'url' | 'required' = 'required'; // Validasyon türü
 
-  private _value: string = '';
+  control: FormControl = new FormControl('');
 
-  @Input()
-  get value(): string {
-    return this._value;
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  writeValue(value: any): void {
+    this.control.setValue(value);
   }
 
-  set value(val: string) {
-    this._value = val;
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+    this.control.valueChanges.subscribe(this.onChange);
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 }

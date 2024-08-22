@@ -37,7 +37,7 @@ export class TableComponent implements OnInit {
   }
 
   loadSocials(): void {
-    this.socialMediaService.getAllSocialMedia().subscribe(
+    this.socialMediaService.getAll().subscribe(
       (data: any[]) => {
         this.socials = data;
       },
@@ -52,7 +52,7 @@ export class TableComponent implements OnInit {
   }
 
   removeById(social: any): void {
-    this.socialMediaService.removeSocialMedia(social._id).subscribe(
+    this.socialMediaService.remove(social._id).subscribe(
       () => {
         this.loadSocials(); // Veriyi güncelledikten sonra yeniden yükle
       },

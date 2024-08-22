@@ -1,5 +1,6 @@
-<form>
+<form [formGroup]="form">
   <app-input-field
+    formControlName="link"
     label="Sosyal Medya Linki"
     type="url"
     appValidMessage="Geçerli bir URL girin"
@@ -7,6 +8,7 @@
   ></app-input-field>
 
   <app-input-field
+    formControlName="name"
     label="Sosyal Medya Adı"
     type="text"
     appValidMessage="Sosyal Medya adı boş olamaz"
@@ -14,6 +16,7 @@
   ></app-input-field>
 
   <app-input-field
+    formControlName="description"
     label="Açıklama"
     type="text"
     appValidMessage="Açıklama boş olamaz"

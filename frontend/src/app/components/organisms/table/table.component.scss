@@ -1,5 +1,5 @@
 .container-table {
-  margin: 0px 50px 0;
+  margin: 0px 30px 0;
 
   .search-button-group {
     display: flex;
@@ -70,8 +70,7 @@
       th,
       td {
           border: 1px solid #C4CEE5;
-          align-items: center;
-  
+          text-align:left;
       }
   
       tr {

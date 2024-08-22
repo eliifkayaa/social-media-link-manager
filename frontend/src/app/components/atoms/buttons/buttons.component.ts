@@ -9,7 +9,7 @@ import { SharedModule } from '../../../commons/modules/shared/shared.module';
   styleUrl: './buttons.component.scss'
 })
 export class ButtonsComponent {
-  @Input() buttonType: 'cancel' | 'save' | 'add' | 'update' = 'save';
+  @Input() buttonType: 'cancel' | 'save' | 'add' | 'update' | 'delete'= 'save';
   @Input() label: string ='';
   @Input () icon?: string;
 
