@@ -33,7 +33,7 @@ router.post("/add", async (req, res) => {
 //SocialMedia Silme
 router.post("/removeById", async (req, res) => {
   try {
-    const { _id } = req.body._id;
+    const { _id } = req.body;
     await Social.findByIdAndDelete(_id);
     res.json({ message: "Sosyal Medya hesabı başarıyla silindi!" });
   } catch (error) {

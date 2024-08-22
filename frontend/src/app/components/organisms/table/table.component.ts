@@ -8,6 +8,9 @@ import { IconComponent } from '../../atoms/icon/icon.component';
 import { SearchComponent } from '../../atoms/search/search.component';
 import { ButtonsComponent } from '../../atoms/buttons/buttons.component';
 import { ModalComponent } from '../modal/modal.component';
+import { SocialMediaModel } from '../../../commons/model/socialMedia.model';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -30,14 +33,16 @@ export class TableComponent implements OnInit {
   search: string = '';
   isModalVisible: boolean = false;
 
-  constructor(private socialMediaService: SocialMediaService) {}
+  social: SocialMediaModel = new SocialMediaModel();
+
+  constructor(private _socialMedia: SocialMediaService) {}
 
   ngOnInit(): void {
-    this.loadSocials();
+    this.getAll();
   }
 
-  loadSocials(): void {
-    this.socialMediaService.getAll().subscribe(
+  getAll(): void {
+    this._socialMedia.getAll().subscribe(
       (data: any[]) => {
         this.socials = data;
       },
@@ -50,18 +55,20 @@ export class TableComponent implements OnInit {
   get(social: any): void {
     // Güncelleme işlemleri için gerekli işlev
   }
-
-  removeById(social: any): void {
-    this.socialMediaService.remove(social._id).subscribe(
-      () => {
-        this.loadSocials(); // Veriyi güncelledikten sonra yeniden yükle
-      },
-      (error) => {
-        console.error('Error removing social media', error);
-      }
-    );
+  remove(social: SocialMediaModel): void {
+    if (confirm('Bu kaydı silmek istediğinizden emin misiniz?')) {
+      this._socialMedia.remove(social._id).subscribe(
+        () => {
+          this.socials = this.socials.filter(item => item._id !== social._id);
+        },
+        (error) => {
+          console.error('Error deleting social media item', error);
+        }
+      );
+    }
   }
 
+  //Modal dialog
   openModal() {
     this.isModalVisible = true;
     console.log('Modal açıldı:', this.isModalVisible);

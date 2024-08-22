@@ -16,6 +16,7 @@ export class ButtonsComponent {
   // Click eventini parent component'e iletmek için EventEmitter kullanılır.
   @Output() buttonClick = new EventEmitter<void>();
 
+  
   handleClick() {
     this.buttonClick.emit();
   }

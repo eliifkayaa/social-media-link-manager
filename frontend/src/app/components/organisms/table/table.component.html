@@ -50,15 +50,12 @@
         <td><app-text text="{{ social.name }}"></app-text></td>
         <td><app-text text="{{ social.description }}"></app-text></td>
         <td>
-          <app-buttons  (buttonClick)="openModal()" buttonType="update" class="btn btn-outline-warning btn-sm " label="Güncelle" class="update-button">
-            <app-icon class="fa fa-edit"></app-icon>
+          <app-buttons icon="fa fa-edit" (buttonClick)="openModal()" buttonType="update">
           </app-buttons>
-          <app-buttons (click)="removeById(social)" buttonType="delete" label="Sil" class="delete-button">
-            <app-icon class="fa fa-trash"></app-icon>
+          <app-buttons (click)="remove(social)" buttonType="delete"  icon="fa fa-trash">
           </app-buttons>
         </td>
       </tr>
     </tbody>
   </table>
-  
 </div>
