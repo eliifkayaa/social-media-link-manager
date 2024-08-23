@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SharedModule } from '../../../commons/modules/shared/shared.module';
 import { TextComponent } from '../../atoms/text/text.component';
 
@@ -9,12 +9,24 @@ import { TextComponent } from '../../atoms/text/text.component';
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss'
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit{
 
-  currentPage = 1;
-  totalPages = 4;  // Total number of pages
-  rowsPerPage = 4;
-  rowsOptions = [4, 8, 12, 16];
+  @Input() currentPage: number = 1;
+  @Input() totalItems: number = 0;
+  @Input() rowsPerPage: number = 4;
+  @Input() rowsOptions: number[] = [4, 8, 12, 16];
+
+  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() rowsPerPageChange: EventEmitter<number> = new EventEmitter<number>();
+
+  totalPages: number = 1;
+  ngOnInit(): void {
+    this.calculateTotalPages();
+  }
+
+  ngOnChanges() {
+    this.calculateTotalPages();
+  }
 
   onRowsChange() {
     this.currentPage = 1; // Reset to first page when rows per page changes
@@ -22,19 +34,28 @@ export class PaginationComponent {
   }
 
   calculateTotalPages() {
-    // Assuming you have a method to calculate the total number of pages based on rows per page.
-    // This can be done based on total number of items.
+    this.totalPages = Math.ceil(this.totalItems / this.rowsPerPage);
+    if (this.currentPage > this.totalPages && this.totalPages > 0) {
+      this.changePage(this.totalPages);
+    }
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.pageChange.emit(this.currentPage);
+    }
   }
 
   nextPage() {
     if (this.currentPage < this.totalPages) {
-      this.currentPage++;
+      this.changePage(this.currentPage + 1);
     }
   }
 
   previousPage() {
     if (this.currentPage > 1) {
-      this.currentPage--;
+      this.changePage(this.currentPage - 1);
     }
   }
 }

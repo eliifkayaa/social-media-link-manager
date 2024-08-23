@@ -78,7 +78,14 @@
     </tbody>
   </table>
 
-  <app-pagination></app-pagination>
+  <app-pagination
+  [currentPage]="currentPage"
+  [totalItems]="totalItems"
+  [rowsPerPage]="rowsPerPage"
+  [rowsOptions]="rowsOptions"
+  (pageChange)="onPageChange($event)"
+  (rowsPerPageChange)="onRowsPerPageChange($event)"
+></app-pagination>
 </div>
 
 

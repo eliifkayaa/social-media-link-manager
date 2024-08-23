@@ -35,6 +35,14 @@ export class TableComponent implements OnInit {
   modalAction: 'save' | 'update' = 'save';  
   selectedSocial: SocialMediaModel = new SocialMediaModel();
 
+  // Pagination
+  currentPage: number = 1;
+  rowsPerPage: number = 4;
+  rowsOptions: number[] = [4, 8, 12, 16];
+  totalItems: number = 0;
+
+  displayedSocials: SocialMediaModel[] = [];
+
   constructor(private _socialMedia: SocialMediaService) {}
 
   ngOnInit(): void {
@@ -45,6 +53,9 @@ export class TableComponent implements OnInit {
     this._socialMedia.getAll().subscribe(
       (data: SocialMediaModel[]) => {
         this.socials = data;
+
+        this.totalItems = data.length;
+        this.updateDisplayedSocials();
       },
       (error) => {
         console.error('Error', error);
@@ -85,4 +96,34 @@ export class TableComponent implements OnInit {
     this.getAll();  
     this.closeModal();
   }
+
+  updateDisplayedSocials(): void {
+    const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+    const endIndex = startIndex + this.rowsPerPage;
+    const filteredSocials = this.socials.filter((social) =>
+      social.name.toLowerCase().includes(this.search.toLowerCase()) ||
+      social.link.toLowerCase().includes(this.search.toLowerCase()) ||
+      social.description.toLowerCase().includes(this.search.toLowerCase())
+    );
+    this.totalItems = filteredSocials.length;
+    this.displayedSocials = filteredSocials.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.updateDisplayedSocials();
+  }
+
+  onRowsPerPageChange(rows: number): void {
+    this.rowsPerPage = rows;
+    this.currentPage = 1;
+    this.updateDisplayedSocials();
+  }
+
+  onSearchChange(): void {
+    this.currentPage = 1;
+    this.updateDisplayedSocials();
+  }
+
+
 }
