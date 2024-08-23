@@ -38,7 +38,7 @@ export class TableComponent implements OnInit {
   rowsOptions: number[] = [7, 4, 8, 12, 16];
   totalItems: number = 0;
 
-  displayedSocials: SocialMediaModel[] = [];
+  displayedSocials: SocialMediaModel[] = []; //pagination
 
   constructor(private _socialMedia: SocialMediaService) {}
 
