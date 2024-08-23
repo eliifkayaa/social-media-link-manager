@@ -33,9 +33,7 @@
   ></app-modal>
 
   <table class="container">
-  
     <thead>
- 
     <tr>
       <th scope="col" class="col-4">
         <app-text class="text" text="Sosyal Medya Link"></app-text>
@@ -54,7 +52,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let social of socials | filterPipe : search">
+      <tr *ngFor="let social of displayedSocials | filterPipe : search">
         <td><app-text text="{{ social.link }}"></app-text></td>
         <td><app-text text="{{ social.name }}"></app-text></td>
         <td><app-text text="{{ social.description }}"></app-text></td>
@@ -78,14 +76,16 @@
     </tbody>
   </table>
 
-  <app-pagination
-  [currentPage]="currentPage"
-  [totalItems]="totalItems"
-  [rowsPerPage]="rowsPerPage"
-  [rowsOptions]="rowsOptions"
-  (pageChange)="onPageChange($event)"
-  (rowsPerPageChange)="onRowsPerPageChange($event)"
-></app-pagination>
-</div>
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalItems]="totalItems"
+      [rowsPerPage]="rowsPerPage"
+      [rowsOptions]="rowsOptions"
+      (pageChange)="onPageChange($event)"
+      (rowsPerPageChange)="onRowsPerPageChange($event)"
+    ></app-pagination>
+    
+  </div>
+
 
 

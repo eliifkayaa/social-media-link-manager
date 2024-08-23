@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SharedModule } from '../../../commons/modules/shared/shared.module';
 import { TextComponent } from '../../atoms/text/text.component';
 
@@ -13,8 +13,8 @@ export class PaginationComponent implements OnInit{
 
   @Input() currentPage: number = 1;
   @Input() totalItems: number = 0;
-  @Input() rowsPerPage: number = 4;
-  @Input() rowsOptions: number[] = [4, 8, 12, 16];
+  @Input() rowsPerPage: number = 7; // Varsayılan 7 satır
+  @Input() rowsOptions: number[] = [7, 4, 8, 12, 16];
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
   @Output() rowsPerPageChange: EventEmitter<number> = new EventEmitter<number>();
@@ -30,6 +30,7 @@ export class PaginationComponent implements OnInit{
 
   onRowsChange() {
     this.currentPage = 1; // Reset to first page when rows per page changes
+    this.rowsPerPageChange.emit(this.rowsPerPage); // Satır sayısını üst bileşene ilet
     this.calculateTotalPages();
   }
 
@@ -59,4 +60,3 @@ export class PaginationComponent implements OnInit{
     }
   }
 }
-
