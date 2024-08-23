@@ -1,4 +1,19 @@
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"
-showFirstLastButtons
-aria-label="Select page of periodic elements">
-</mat-paginator>
+<div class="pagination-container">
+  <div class="pagination-info">
+    <span>Show:</span>
+    <div class="pagination-rows">
+      <select [(ngModel)]="rowsPerPage" (change)="onRowsChange()">
+        <option *ngFor="let row of rowsOptions" [value]="row">{{ row }} rows</option>
+      </select>
+    </div>
+  </div>
+  <div class="pagination-controls">
+    <button [disabled]="currentPage === 1" (click)="previousPage()">
+      <i class="arrow left"></i>
+    </button>
+    <span>{{ currentPage }} of {{ totalPages }}</span>
+    <button [disabled]="currentPage === totalPages" (click)="nextPage()">
+      <i class="arrow right"></i>
+    </button>
+  </div>
+</div>
