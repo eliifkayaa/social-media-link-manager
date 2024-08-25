@@ -47,7 +47,6 @@ Bu dökümantasyon, Sosyal Medya ve Link Yönetim Uygulaması'nın nasıl çalı
    - Mevcut kullanıcılar, kullanıcı adı ve şifre bilgilerini kullanarak giriş yapabilirler.
    - Kullanıcı adı olarak `elifgokce` ve şifre olarak `1` kullanarak giriş testi yapabilirsiniz.
    - Giriş başarılı olduğunda, kullanıcı bilgileri ve erişim token'ı `localStorage`'a kaydedilir ve uygulamanın ana sayfasına (`/home`) yönlendirilir.
-   - `elifgokce` kullanıcı adı ve `1` şifresi ile giriş yapılabilir.
 
 ### Ana Sayfa (Home Page)
 
@@ -74,17 +73,32 @@ Bu dökümantasyon, Sosyal Medya ve Link Yönetim Uygulaması'nın nasıl çalı
 ### Teknik Detaylar
 
 1. **Backend API**:
-
    - Backend, kullanıcı kayıt, giriş, sosyal medya linklerini ekleme, güncelleme ve silme işlemlerini gerçekleştiren API uç noktalarına sahiptir.
    - API, `localhost:3000` adresinde çalışır ve sosyal medya verilerini MongoDB veritabanında saklar.
+   - API uç noktaları:
+     - **POST `/api/auth/register`**: Kullanıcı kaydı oluşturur.
+     - **POST `/api/auth/login`**: Kullanıcı giriş işlemi yapar.
+     - **POST `/api/socialmedia/add`**: Sosyal medya linki ekler.
+     - **POST `/api/socialmedia/update`**: Sosyal medya linkini günceller.
+     - **POST `/api/socialmedia/removeById`**: Sosyal medya linkini siler.
+     - **GET `/api/socialmedia/getById/:id`**: Sosyal medya linkini ID ile getirir.
+     - **GET `/api/socialmedia/getAll`**: Tüm sosyal medya linklerini getirir.
 
 2. **Frontend**:
-
    - Angular, kullanıcı arayüzünü oluşturur ve veri etkileşimlerini yönetir.
    - `HttpClient` servisi, backend API ile iletişim kurarak verileri alır ve gönderir.
    - Modallar, form işlemleri ve kullanıcı etkileşimlerini yönetir.
 
-3. **Veri Saklama**:
+3. **Pipes**:
+   - **Filter Pipe**: Sosyal medya linkleri arasında arama yaparken kullanılan pipe. Arama terimi ile eşleşen verileri filtreler.
+
+4. **Guards**:
+   - **AuthGuard**: Kullanıcıların yetkilendirilmiş sayfalara erişimini kontrol eder ve kullanıcıların giriş yapmadan korunan sayfalara erişmesini engeller.
+
+5. **Directives**:
+   - **Valid Directive**: Form input alanlarının geçerli olup olmadığını kontrol eder. URL'nin doğru formatta olup olmadığını ve input alanlarının boş veya dolu olup olmadığını denetler.
+
+6. **Veri Saklama**:
    - Kullanıcı bilgileri ve erişim token'ları `localStorage`'da saklanır.
    - Sosyal medya linkleri, tarayıcı kapalı olsa bile `localStorage`'da saklanır ve uygulama tekrar açıldığında yüklenir.
 
