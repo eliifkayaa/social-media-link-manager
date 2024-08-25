@@ -4,6 +4,7 @@ const cors = require('cors');
 
 //Routes
 const socialMediaRouter = require("./routers/social.router")
+const authRouter = require("./routers/auth.router");
 
 //Api istekleri için:
 const app = express();
@@ -18,7 +19,8 @@ app.use(cors());
 connection();
 
 //Social Media Routes
-app.use("/api/socialmedia/", socialMediaRouter)
+app.use("/api/socialmedia/", socialMediaRouter);
+app.use("/api/auth/", authRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log("Server is running"))

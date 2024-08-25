@@ -11,9 +11,9 @@ import { FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/fo
   styleUrl: './input-field.component.scss',
   providers: [
     {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputFieldComponent),
-      multi: true,
+      provide: NG_VALUE_ACCESSOR, // Angular'ın form kontrolü için kullanılan token
+      useExisting: forwardRef(() => InputFieldComponent), // Bu bileşenin form değerini yönetmesini sağlar
+      multi: true, // Birden fazla sağlayıcıya izin verir
     },
   ],
 })
@@ -27,18 +27,22 @@ export class InputFieldComponent {
 
   control: FormControl = new FormControl('');
 
+  // Form değerini değiştirmek ve formun dokunduğunu belirtmek için kullanılan işlevler
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
 
+   //Form kontrolünün değerini dışarıdan alır.
   writeValue(value: any): void {
     this.control.setValue(value);
   }
 
+  //Form kontrolü değeri değiştiğinde çağrılacak işlevi kaydeder.
   registerOnChange(fn: (value: any) => void): void {
     this.onChange = fn;
     this.control.valueChanges.subscribe(this.onChange);
   }
 
+  //Form kontrolü dokunduğunda çağrılacak işlevi kaydeder.
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }

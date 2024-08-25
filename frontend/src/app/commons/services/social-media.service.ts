@@ -10,6 +10,7 @@ export class SocialMediaService {
 
     constructor(private http: HttpClient) {}
 
+  // Dönüş tipi Observable'dır, yani veriler asenkron olarak döner.
     getAll(): Observable<any> {
       return this.http.get(`${this.apiUrl}/getAll`);
     }
@@ -24,6 +25,10 @@ export class SocialMediaService {
   
     remove(id: string): Observable<any> {
       return this.http.post(`${this.apiUrl}/removeById`, { _id: id });
+    }
+
+    getLinkById(id: string): Observable<any> {
+      return this.http.get(`${this.apiUrl}/getById/${id}`);
     }
 
   }

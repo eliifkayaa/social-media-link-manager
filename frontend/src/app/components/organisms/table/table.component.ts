@@ -20,39 +20,40 @@ import { SocialMediaModel } from '../../../commons/model/socialMedia.model';
     IconComponent,
     SearchComponent,
     ButtonsComponent,
-    ModalComponent,
+    ModalComponent
   ],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  socials: SocialMediaModel[] = [];
-  search: string = '';
-  isModalVisible: boolean = false;
-  modalAction: 'save' | 'update' = 'save';
-  selectedSocial: SocialMediaModel = new SocialMediaModel();
+  socials: SocialMediaModel[] = []; // Sosyal medya verileri
+  search: string = ''; // Arama terimi
+  isModalVisible: boolean = false; // Modal görünürlük durumu
+  modalAction: 'save' | 'update' = 'save'; // Modalda yapılacak işlem: kaydetme veya güncelleme
+  selectedSocial: SocialMediaModel = new SocialMediaModel(); // Seçilen sosyal medya verisi
 
-  // Pagination
-  currentPage: number = 1;
-  rowsPerPage: number = 7; // Varsayılan 7 satır göster
-  rowsOptions: number[] = [7, 4, 8, 12, 16];
-  totalItems: number = 0;
-
-  displayedSocials: SocialMediaModel[] = []; //pagination
+  // Pagination değişkenleri
+  currentPage: number = 1; // Mevcut sayfa
+  rowsPerPage: number = 7; // Her sayfada gösterilen satır sayısı, varsayılan 7
+  rowsOptions: number[] = [7, 4, 8, 12, 16]; // Kullanıcının seçebileceği satır sayısı seçenekleri
+  totalItems: number = 0; // Toplam öğe sayısı
+  displayedSocials: SocialMediaModel[] = []; // Sayfalama için gösterilen sosyal medya verileri
 
   constructor(private _socialMedia: SocialMediaService) {}
 
   ngOnInit(): void {
-    this.getAll();
+    this.loadFromLocalStorage(); // LocalStorage'dan veriyi yükler
+    this.getAll(); // Sosyal medya verilerini getirir
   }
   getAll(): void {
     this._socialMedia.getAll().subscribe(
       (data: SocialMediaModel[]) => {
-        this.socials = data;
+        this.socials = data; // Veriyi sosyal medya dizisine atar
+        this.saveToLocalStorage(); // LocalStorage'a kaydet
 
         //pagination
-        this.totalItems = data.length;
-        this.updateDisplayedSocials();
+        this.totalItems = data.length; // Toplam öğe sayısını günceller
+        this.updateDisplayedSocials(); // Gösterilen sosyal medya verilerini günceller
       },
       (error) => {
         console.error('Error', error);
@@ -64,8 +65,8 @@ export class TableComponent implements OnInit {
     if (confirm('Bu kaydı silmek istediğinizden emin misiniz?')) {
       this._socialMedia.remove(social._id).subscribe(
         () => {
-          this.socials = this.socials.filter((item) => item._id !== social._id);
-          this.updateDisplayedSocials();
+          this.socials = this.socials.filter((item) => item._id !== social._id);  // Silinen öğeyi listeden çıkarırr
+          this.updateDisplayedSocials(); // Gösterilen sosyal medya verilerini günceller
         },
         (error) => {
           console.error('Error', error);
@@ -74,52 +75,64 @@ export class TableComponent implements OnInit {
     }
   }
 
-  //Modal dialog
+  // Modal dialog işlemleri
   openModal(action: 'save' | 'update', social?: SocialMediaModel): void {
-    this.modalAction = action;
+    this.modalAction = action; // Modalda yapılacak işlemi ayarlar
     if (action === 'update' && social) {
-      this.selectedSocial = { ...social }; // Güncellenmiş sosyal medya verilerini seç
+      this.selectedSocial = { ...social }; // Güncellenmiş sosyal medya verilerini seçer
     } else {
-      this.selectedSocial = new SocialMediaModel(); // Yeni ekleme için resetle
+      this.selectedSocial = new SocialMediaModel(); // Yeni ekleme için sosyal medya modelini sıfırlar
     }
-    this.isModalVisible = true;
+    this.isModalVisible = true; // Modali görünür yapar
   }
 
   closeModal() {
-    this.isModalVisible = false;
-    console.log('Modal kapatıldı:', this.isModalVisible);
+    this.isModalVisible = false; // Modali kapalı yapar
+    console.log('Modal kapatıldı:', this.isModalVisible); // Modal kapatıldığını konsola yazar
   }
 
   onFormSaved(): void {
-    this.getAll();
-    this.closeModal();
+    this.getAll(); // Form kaydedildiğinde verileri yeniden getirir
+    this.closeModal(); // Modali kapatır
   }
 
   updateDisplayedSocials(): void {
-    const startIndex = (this.currentPage - 1) * this.rowsPerPage;
-    const endIndex = startIndex + this.rowsPerPage;
+    const startIndex = (this.currentPage - 1) * this.rowsPerPage; // Sayfanın başlangıç indeksi (2 - 1) * 7 = 7
+    const endIndex = startIndex + this.rowsPerPage; // Sayfanın bitiş indeksi 7 + 7 = 14,  1. sayfa (0-6)
     const filteredSocials = this.socials.filter(
       (social) =>
-        social.name.toLowerCase().includes(this.search.toLowerCase()) ||
-        social.link.toLowerCase().includes(this.search.toLowerCase()) ||
-        social.description.toLowerCase().includes(this.search.toLowerCase())
+        social.name.toLowerCase().includes(this.search.toLowerCase()) || // Arama terimiyle eşleşen sosyal medya adı
+        social.link.toLowerCase().includes(this.search.toLowerCase()) || // Arama terimiyle eşleşen sosyal medya linki
+        social.description.toLowerCase().includes(this.search.toLowerCase()) // Arama terimiyle eşleşen sosyal medya açıklaması
     );
-    this.totalItems = filteredSocials.length;
-    this.displayedSocials = filteredSocials.slice(startIndex, endIndex);
+    this.totalItems = filteredSocials.length; // Filtrelenmiş öğe sayısını günceller
+    this.displayedSocials = filteredSocials.slice(startIndex, endIndex); // Gösterilen sosyal medya verilerini ayarlar
   }
   onPageChange(page: number): void {
-    this.currentPage = page;
-    this.updateDisplayedSocials();
+    this.currentPage = page; // Mevcut sayfayı günceller
+    this.updateDisplayedSocials(); // Gösterilen sosyal medya verilerini günceller
   }
 
   onRowsPerPageChange(rows: number): void {
-    this.rowsPerPage = rows;
-    this.currentPage = 1;
-    this.updateDisplayedSocials();
+    this.rowsPerPage = rows; // Her sayfada gösterilen satır sayısını günceller
+    this.currentPage = 1; // Sayfayı birinci sayfaya sıfırlar
+    this.updateDisplayedSocials(); // Gösterilen sosyal medya verilerini günceller
   }
 
   onSearchChange(): void {
-    this.currentPage = 1;
-    this.updateDisplayedSocials();
+    this.currentPage = 1; // Arama değiştiğinde sayfayı birinci sayfaya sıfırlar
+    this.updateDisplayedSocials(); // Gösterilen sosyal medya verilerini günceller
+  }
+
+  saveToLocalStorage(): void {
+    localStorage.setItem('socialLinks', JSON.stringify(this.socials)); // Sosyal medya verilerini LocalStorage'a kaydeder
+  }
+  
+  loadFromLocalStorage(): void {
+    const data = localStorage.getItem('socialLinks'); // LocalStorage'dan veri alır
+    if (data) {
+      this.socials = JSON.parse(data); // Veriyi parse eder ve sosyal medya dizisine atar
+      this.updateDisplayedSocials(); // Gösterilen sosyal medya verilerini günceller
+    }
   }
 }

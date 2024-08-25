@@ -20,11 +20,11 @@ export class FormGroupComponent implements OnInit{
   @Output() formCancelled = new EventEmitter<void>();
   @Output() formSaved = new EventEmitter<void>();
 
-  form: FormGroup;
+  form: FormGroup; // Angular Reactive Form için FormGroup değişkeni
 
   constructor(private socialMediaService: SocialMediaService, private fb: FormBuilder) {
-    this.form = this.fb.group({
-      link: [''],
+    this.form = this.fb.group({ // FormBuilder ile form oluşturma
+      link: [''], 
       name: [''],
       description: [''],
     });
@@ -32,8 +32,9 @@ export class FormGroupComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.action === 'update' && this.socialMedia) {
-      // Formu güncelle
+    // Eğer işlem türü 'update' ve sosyal medya verisi varsa
       this.form.patchValue({
+        // Formu mevcut sosyal medya verileri ile güncelle
         link: this.socialMedia.link,
         name: this.socialMedia.name,
         description: this.socialMedia.description
@@ -45,8 +46,8 @@ export class FormGroupComponent implements OnInit{
     console.log('Kaydet butonuna tıklandı!');
     if (this.form.valid) {
       const socialMediaData = this.form.value;
-      if (this.action === 'save') {
-        this.socialMediaService.add(socialMediaData).subscribe(
+      if (this.action === 'save') { // Eğer işlem türü 'save' ise
+        this.socialMediaService.add(socialMediaData).subscribe( // Sosyal medya verisini ekler
           response => {
             console.log('Başarıyla kaydedildi', response);
             this.formSaved.emit(); // Form kaydedildiğinde modal kapatır
@@ -55,7 +56,7 @@ export class FormGroupComponent implements OnInit{
             console.error('Kaydetme hatası:', error);
           }
         );
-      } else if (this.action === 'update') {
+      } else if (this.action === 'update') { // Eğer işlem türü 'update' ise
         // Güncellemeyi yap
         this.socialMediaService.update({ ...this.socialMedia, ...socialMediaData }).subscribe(
           response => {

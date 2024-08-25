@@ -17,18 +17,19 @@ import { FormGroupComponent } from '../../molecules/form-group/form-group.compon
   imports: [FormGroupComponent, SharedModule, ButtonsComponent],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush, // Bileşenin değişim algılaması OnPush oalrak ayarlandı.
 })
 export class ModalComponent implements OnInit {
   constructor() {}
 
-  @Input() isVisible: boolean = false;
- 
-  @Input() socialMedia: SocialMediaModel = new SocialMediaModel();
+  @Input() isVisible: boolean = false; // Modal'ın görünürlük durumu.
+  @Input() socialMedia: SocialMediaModel = new SocialMediaModel(); // Modal'a aktarılan veri.
+
+  // Modal kapatıldığında dışa aktarılan olay.
   @Output() modalClose = new EventEmitter<void>();
   @Output() formSaved = new EventEmitter<void>();
 
-  @Input() action: 'save' | 'update' = 'save';
+  @Input() action: 'save' | 'update' = 'save'; // Formun kaydetme veya güncelleme amacıyla kullanıldığını belirten tür.
 
   ngOnInit(): void {}
 
@@ -40,6 +41,6 @@ export class ModalComponent implements OnInit {
   onFormSaved() {
     console.log('Form başarıyla kaydedildi');
     this.formSaved.emit();
-    this.closeModal();
+    this.closeModal(); // Modal'ı kapatır.
   }
 }

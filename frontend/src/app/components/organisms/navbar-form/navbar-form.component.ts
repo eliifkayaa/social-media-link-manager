@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarLinkComponent } from '../../molecules/navbar-link/navbar-link.component';
 import { IconComponent } from '../../atoms/icon/icon.component';
 import { SocialIconGroupComponent } from '../../molecules/social-icon-group/social-icon-group.component';
-import { LogoComponent } from '../../molecules/logo/logo.component';
+import { LogoComponent } from '../../atoms/logo/logo.component';
 
 @Component({
   selector: 'app-navbar-form',

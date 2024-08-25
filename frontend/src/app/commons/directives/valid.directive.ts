@@ -10,16 +10,16 @@ export class ValidDirective {
   @Input() appValidMessage: string = ''; // Validasyon mesajı
 
   constructor(
-    private _el: ElementRef<HTMLInputElement>, //DOM elementine erişim sağlar
-    private renderer: Renderer2                //DOM üzerinde stil ve sınıf işlemleri yapılır
+    private _el: ElementRef<HTMLInputElement>, //ElementRef kullanılarak DOM elementine erişim sağlar
+    private renderer: Renderer2                //Renderer2 kullanılarak DOM üzerinde stil ve sınıf işlemleri yapılır
   ) { }
 
-  @HostListener('keyup') onKeyUp() { //her tuş bırakıldığında 
+  @HostListener('keyup') onKeyUp() { //Her tuş bırakıldığında bu fonksiyon tetiklenir.
     const value = this._el.nativeElement.value; //DOM elementinin mevcut değerini alır
     let isValid = true;
     let feedbackMessage = '';
 
-//appValid değerine göre validasyon türü belirlenir. url ise URL doğrulama yapılır, required ise alanın boş olup olmadığı kontrol edilir. Hata mesajı belirlenir
+//appValid değerine göre validasyon türü belirlenir. URL ise URL doğrulama yapılır, required ise alanın boş olup olmadığı kontrol edilir. Hata mesajı belirlenir.
     switch (this.appValid) {
       case 'url':
         isValid = this.isValidUrl(value);
@@ -34,10 +34,11 @@ export class ValidDirective {
         feedbackMessage = '';
     }
 
+    //Validasyon sonuçlarına göre stil ve geri bildirim güncellenir
     this.updateValidationClasses(isValid);
-    this.updateFeedbackMessage(isValid, feedbackMessage); //Validasyon sonuçlarına göre stil ve geri bildirim güncellenir
+    this.updateFeedbackMessage(isValid, feedbackMessage); 
   }
-  //Verilen değerin geçerli bir URL olup olmadığını kontrol eder. URL regex kullanarak bu doğrulamayı yapar
+  //Verilen değerin geçerli bir URL olup olmadığını kontrol eder. URL doğrulama için regex kullanılır.
   private isValidUrl(value: string): boolean {
     const urlPattern = new RegExp('^(https?:\\/\\/)?(www\\.)?([\\w-]+)\\.[a-z]{2,}([\\/\\w\\.-]*)*\\/?.*$', 'i');
     return urlPattern.test(value);
