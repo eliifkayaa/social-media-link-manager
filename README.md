@@ -21,6 +21,7 @@ Bu proje, kullanıcıların sosyal medya linklerini ve bu linklere ait bilgileri
 ## Kurulum ve Çalıştırma
 
 1. **Frontend ve Backend Bağımlılıklarını Yükleme**:
+
    ```bash
    cd frontend
    npm install
@@ -29,3 +30,12 @@ Bu proje, kullanıcıların sosyal medya linklerini ve bu linklere ait bilgileri
    cd ../backend
    npm install
    npm start
+
+   Frontend: http://localhost:4200
+   Backend: http://localhost:3000
+
+   Notlar:
+   Resolver kullanılmamıştır.
+   Kodda karmaşık bloklar için yorumlar mevcuttur.
+   Kodun okunabilirliği ve temizliğine özen gösterilmiştir.
+   ```
