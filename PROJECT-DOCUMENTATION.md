@@ -21,11 +21,11 @@ Bu dökümantasyon, Sosyal Medya ve Link Yönetim Uygulaması'nın nasıl çalı
 1. **Atomic Design Yapısının Oluşturulması:**
    - Frontend için Atomic Design prensiplerine uygun bir yapı kuruldu.
    - Bileşenler, en küçük birimden (atom) en büyük yapıya (page) kadar düzenlendi.
-   - **Atoms:** Buton, heading, ikon, input field, logo, search, text.
-   - **Molecules:** Form grup, nullbar link, social icon grup.
-   - **Organisms:** Modal, nullbar form, pagination table.
-   - **Templates:** Homepage, login, register komponentleri.
-   - **Pages:** Tüm bileşenler birleştirilerek app, homepage sayfaları oluşturuldu.
+   - **Atoms:** Buttons, heading, icon, input-field, logo, search, text.
+   - **Molecules:** Form-group,  navbar-link, social-icon-grup.
+   - **Organisms:** Modal, navbar-form, pagination, table.
+   - **Templates:** Home-page, login, register
+   - **Pages:** Tüm bileşenler birleştirilerek app-homepage oluşturuldu.
 
 2. **Tasarım ve Stil:**
    - Figma'dan alınan tasarım verilerine uygun olarak buton, ikon gibi nesneler tasarlandı.
